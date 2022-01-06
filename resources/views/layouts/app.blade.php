@@ -57,7 +57,7 @@
                         </li> --}}
 
                         <li class="nav-item mx-2 dropdown">
-                            <a style="color: black;font-weight: bold" id="navbarDropdown" class="btn btn-info nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre href="{{ route('posts.index') }}">{{ __('Managment') }}</a>
+                            <a style="color: black;font-weight: bold" id="navbarDropdown" class="btn btn-warning nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre href="{{ route('posts.index') }}">{{ __('Managment') }}</a>
 
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                                 <a class="dropdown-item">
@@ -67,7 +67,7 @@
                                 <a class="dropdown-item">
                                     Permission
                                  </a>
-                                 <a class="dropdown-item">
+                                 <a href="{{route('roles.index')}}" class="dropdown-item">
                                     Roles
                                  </a>
 
