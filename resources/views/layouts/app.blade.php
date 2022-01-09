@@ -64,7 +64,7 @@
                                   Users
                                 </a>
 
-                                <a class="dropdown-item">
+                                <a href="{{ route('permissions.index') }}" class="dropdown-item">
                                     Permission
                                  </a>
                                  <a href="{{route('roles.index')}}" class="dropdown-item">

@@ -5,29 +5,17 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div style="background: #A9DFBF"  class="card-header  text-center"> <h2>Roles Managment</h2></div>
+                <div style="background: #A9DFBF"  class="card-header  text-center"> <h2>Permissions Managment</h2></div>
                 <div class="card-body">
                     <div class="row">
                         <div class="col-md-4 mx-auto">
                         <div class="myform form ">
-                            <h3>Add Role</h3>
-                            <form action="{{route('roles.store')}}" method="post" name="login">
+                            <h3>Add Permission</h3>
+                            <form action="{{route('permissions.store')}}" method="post" name="login">
                                <div class="form-group">
                                    {{csrf_field()}}
-                                  <input type="text" name="role"  class="form-control my-input" id="name" placeholder="Name">
+                                  <input type="text" name="permission"  class="form-control my-input" id="name" placeholder="Name">
                                </div>
-                               <br>
-
-
-                                    <p>Add your permissions</p>
-                                   @foreach ($permissions as $permission)
-                                   <div class="form-check">
-                                   <input class="form-check-input" type="checkbox" name="name[]" value="{{$permission->name}}" id="{{$permission->name}}">
-                                   <label class="form-check-label" for="{{$permission->name}}">
-                                    {{$permission->name}}
-                                   </label>
-                                </div>
-                                   @endforeach
                                    <br>
                                <button class="btn btn-success">Submit</button>
                             </form>
@@ -38,33 +26,22 @@
                           <table class="table table-bordered">
                             <thead>
                                 <tr class="border">
-                                    <th>Role Name</th>
                                     <th>Permission</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($roles as $role)
+                                @foreach ($permissions as $permission)
                                 <tr>
-                                    <td>{{$role->name}}</td>
+                                    <td>{{$permission->name}}</td>
                                     <td>
-
-                                        @foreach ( $role->permissions as $permission )
-                                        <span style="background: #90EE90; padding-left: 4px;
-                                         padding-right: 4px; border-radius: 4px;">{{$permission->name}}</span>
-                                        @endforeach
-                                    </td>
-                                    <td>
-                                        <form action="{{route('roles.destroy',$role->id)}}" method="POST">
+                                        <form action="{{route('permissions.destroy',$permission->id)}}" method="POST">
                                             @method('DELETE')
                                             {{csrf_field()}}
                                             <button class="btn btn-sm btn-danger">Delete</button>
                                         </form>
                                     </td>
-
-
-
-                                </tr>
+                              </tr>
                                 @endforeach
 
 
