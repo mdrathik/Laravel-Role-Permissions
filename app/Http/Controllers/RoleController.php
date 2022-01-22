@@ -31,4 +31,38 @@ class RoleController extends Controller
     }
 
 
+    public function getData($id){
+        $permissions = Permission::all();
+        $current = Role::findByName($id)->permissions;
+        $html = '';
+
+        foreach($permissions as $data){
+            $checked = '';
+            foreach($current as $now){
+               if($now->name === $data->name){
+                   $checked = "checked";
+               }
+            }
+
+            $html .= '<div class="form-check">
+                        <input type="hidden" name="id" value='.$id.'>
+                        <input class="form-check-input" type="checkbox" '.$checked.' name="name[]" value="'.$data->name.'" id="x'.$data->name.'">
+                        <label class="form-check-label" for="x'.$data->name.'">
+                            '.$data->name.'
+                        </label>
+                    </div>';
+        }
+        return $html;
+    }
+
+
+    public function SavePermission(Request $request){
+
+        $role=Role::findByName($request->id);
+        $role->syncPermissions($request->name);
+        return redirect()->back();
+    }
+
+
+
 }

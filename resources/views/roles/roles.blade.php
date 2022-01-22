@@ -14,7 +14,7 @@
                             <form action="{{route('roles.store')}}" method="post" name="login">
                                <div class="form-group">
                                    {{csrf_field()}}
-                                  <input type="text" name="role"  class="form-control my-input" id="name" placeholder="Name">
+                                  <input type="text" name="role"  required class="form-control my-input" id="name" placeholder="Name">
                                </div>
                                <br>
 
@@ -34,7 +34,7 @@
                          </div>
                       </div>
                       <div class="col-md-8 mx-auto">
-                        <h3>List</h3>
+                        <h3>Roles with Permission</h3>
                           <table class="table table-bordered">
                             <thead>
                                 <tr class="border">
@@ -54,8 +54,12 @@
                                          padding-right: 4px; border-radius: 4px;">{{$permission->name}}</span>
                                         @endforeach
                                     </td>
-                                    <td>
-                                        <form action="{{route('roles.destroy',$role->id)}}" method="POST">
+                                    <td style="display: inline-flex;">
+                                        <button style="margin: 2px" type="button" class="btn btn-sm btn-primary" onclick="EditRole('{{$role->name}}')">
+                                            Edit
+                                          </button>
+
+                                        <form style="margin: 2px" action="{{route('roles.destroy',$role->id)}}" method="POST">
                                             @method('DELETE')
                                             {{csrf_field()}}
                                             <button class="btn btn-sm btn-danger">Delete</button>
@@ -76,5 +80,49 @@
             </div>
         </div>
     </div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Role - <span id="balId"></span></h5>
+
+      </div>
+      <form method="POST" action="{{route('savePermission')}}">
+        {{ csrf_field() }}
+      <div class="modal-body" id="role_content">
+
+
+            <input type="number" hidden value="1">
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" onclick="closeModal()">Close</button>
+        <button type="submit" class="btn btn-primary">Save changes</button>
+    </form>
+      </div>
+    </div>
+  </div>
 </div>
+</div>
+<script>
+    function EditRole(id){
+        $.ajax({
+            type: 'GET',
+            url: "get-data/" + id,
+            success: function(resultData) {
+                // console.log(resultData);
+              $('#balId').text(id);
+              $("#role_content").html(resultData);
+              $('#exampleModalCenter').modal('show');
+            }
+        });
+    };
+
+    function closeModal(){
+        $('#exampleModalCenter').modal('hide');
+    }
+</script>
 @endsection

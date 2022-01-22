@@ -31,13 +31,12 @@
                                 <a class="btn btn-sm btn-success">Published</a>
                                 @endif
 
-                                @hasrole('admin')
+
                                 <form action="{{route('posts.destroy',$post->id)}}" method="POST">
                                     @method('DELETE')
                                     {{csrf_field()}}
                                     <button type="submit"  class="btn btn-sm btn-danger">Delete</button>
                                 </form>
-                                @endhasrole
 
                             </td>
                           </tr>
