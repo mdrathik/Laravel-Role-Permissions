@@ -5,7 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\UserPermissionController;
-
+use App\Http\Controllers\UsersController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -33,6 +33,7 @@ Route::post('/save-permission', [RoleController::class, 'SavePermission'])->name
 
 
 Route::resource('permissions',PermissionController::class);
+Route::resource('users',UsersController::class);
 
 
 
