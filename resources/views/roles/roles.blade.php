@@ -8,6 +8,7 @@
                 <div style="background: #A9DFBF"  class="card-header  text-center"> <h2>Roles Managment</h2></div>
                 <div class="card-body">
                     <div class="row">
+                        @can('Create')
                         <div class="col-md-4 mx-auto">
                         <div class="myform form ">
                             <h3>Add Role</h3>
@@ -33,6 +34,7 @@
                             </form>
                          </div>
                       </div>
+                      @endcan
                       <div class="col-md-8 mx-auto">
                         <h3>Roles with Permission</h3>
                           <table class="table table-bordered">
@@ -40,7 +42,9 @@
                                 <tr class="border">
                                     <th>Role Name</th>
                                     <th>Permission</th>
-                                    <th>Action</th>
+                                    @can('Edit Role | Delete Role')
+
+                                    <th>Action</th> @endcan
                                 </tr>
                             </thead>
                             <tbody>
@@ -55,15 +59,15 @@
                                         @endforeach
                                     </td>
                                     <td style="display: inline-flex;">
-                                        <button style="margin: 2px" type="button" class="btn btn-sm btn-primary" onclick="EditRole('{{$role->name}}')">
+                                      @can('Edit Role')  <button style="margin: 2px" type="button" class="btn btn-sm btn-primary" onclick="EditRole('{{$role->name}}')">
                                             Edit
-                                          </button>
+                                          </button>@endcan
 
-                                        <form style="margin: 2px" action="{{route('roles.destroy',$role->id)}}" method="POST">
+                                      @can('Delete Role')  <form style="margin: 2px" action="{{route('roles.destroy',$role->id)}}" method="POST">
                                             @method('DELETE')
                                             {{csrf_field()}}
                                             <button class="btn btn-sm btn-danger">Delete</button>
-                                        </form>
+                                        </form> @endcan
                                     </td>
 
 

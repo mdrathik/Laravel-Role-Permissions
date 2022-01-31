@@ -8,6 +8,7 @@
                 <div style="background: #A9DFBF"  class="card-header  text-center"> <h2>Permissions Managment</h2></div>
                 <div class="card-body">
                     <div class="row">
+                        @can('Add Permission')
                         <div class="col-md-4 mx-auto">
                         <div class="myform form ">
                             <h3>Add Permission</h3>
@@ -21,19 +22,21 @@
                             </form>
                          </div>
                       </div>
+                      @endcan
                       <div class="col-md-8 mx-auto">
                         <h3>List</h3>
                           <table class="table table-bordered">
                             <thead>
                                 <tr class="border">
                                     <th>Permission</th>
-                                    <th>Action</th>
+                                    @can('Delete Permission') <th>Action</th> @endcan
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach ($permissions as $permission)
                                 <tr>
                                     <td>{{$permission->name}}</td>
+                                    @can('Delete Permission')
                                     <td>
                                         <form action="{{route('permissions.destroy',$permission->id)}}" method="POST">
                                             @method('DELETE')
@@ -41,6 +44,7 @@
                                             <button class="btn btn-sm btn-danger">Delete</button>
                                         </form>
                                     </td>
+                                    @endcan
                               </tr>
                                 @endforeach
 

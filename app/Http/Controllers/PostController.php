@@ -7,9 +7,16 @@ use Illuminate\Http\Request;
 
 class PostController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('permission:Show Post')->only('index');
+        $this->middleware('permission:Create Post')->only('create','store');
+        $this->middleware('permission:Edit Post')->only('edit', 'update');
+        $this->middleware('permission:Delete Post')->only('destroy');
+    }
     public function index(){
         $posts = Post::all();
-        return view('posts.posts',['posts'=>$posts]);
+        return view('posts.index',['posts'=>$posts]);
     }
 
     public function create(){

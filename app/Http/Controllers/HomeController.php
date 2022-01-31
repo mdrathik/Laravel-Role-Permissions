@@ -32,6 +32,6 @@ class HomeController extends Controller
         //$permission = Permission::findById(2);
         //$role->givePermissionTo($permission );
         //Auth::user()->assignRole('admin');
-        return view('home');
+        return redirect('/posts');
     }
 }

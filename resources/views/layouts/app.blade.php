@@ -52,10 +52,11 @@
                                 </li>
                             @endif
                         @else
-                        {{-- <li class="nav-item">
-                            <a class="nav-link btn btn-sm btn-warning" href="{{ route('posts.index') }}">{{ __('Blogs') }}</a>
-                        </li> --}}
+                        <li class="nav-item">
+                            <a class="nav-link btn btn-sm" href="{{ route('posts.index') }}">{{ __('Blogs') }}</a>
+                        </li>
 
+                        @role('Admin|SuperAdmin')
                         <li class="nav-item mx-2 dropdown">
                             <a style="color: black;font-weight: bold" id="navbarDropdown" class="btn btn-warning nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre href="{{ route('posts.index') }}">{{ __('Managment') }}</a>
 
@@ -73,6 +74,7 @@
 
                             </div>
                         </li>
+                        @endrole
 
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>

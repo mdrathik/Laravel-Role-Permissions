@@ -9,7 +9,15 @@ use Illuminate\Support\Facades\Hash;
 
 
 class UsersController extends Controller
+
 {
+    public function __construct()
+    {
+        $this->middleware('permission:Show User')->only('index');
+        $this->middleware('permission:Create User')->only('create');
+        $this->middleware('permission:Edit User')->only('edit', 'store','update');
+        $this->middleware('permission:Delete User')->only('destroy');
+    }
     public function index()
     {
         $users = User::all();
@@ -30,6 +38,18 @@ class UsersController extends Controller
         ]);
 
           $user->assignRole($request->role);
-        return $request->all();
+        return redirect()->back();
+    }
+
+    public function edit($id){
+        $roles = Role::all();
+        $user=User::find($id);
+        return view('users.edit', ['user'=>$user,'roles'=>$roles]);
+    }
+
+    public function update(Request $request,$id){
+        $user=User::find($id);
+        $user->syncRoles($request->role);
+        return redirect('/users');
     }
 }
