@@ -25,7 +25,6 @@ Screenshot :
 - Run `php artisan migrate --seed` (it has some seeded data - see below)
 - That's it: launch the main URL and login with default credentials `admin@admin.com` - `password`
 
-With that user you can create more roles/permissions/users, and then use them in your code, by using functionality like `Gate` or `@can`, as in default Laravel, or with help of Spatie's package methods.
 
 ## License
 
