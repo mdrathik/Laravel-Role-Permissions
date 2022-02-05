@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
+use Illuminate\Support\Facades\Validator;
 
 class PermissionController extends Controller
 {
@@ -22,8 +23,15 @@ class PermissionController extends Controller
     }
 
     public function store(Request $request){
+        $validator = Validator::make($request->all(), [
+            'permission' => ['required'],
+        ]);
+        if ($validator->fails()) {
+            return "validation Fails For Update";
+        } else {
         Permission::create(['name'=>$request->permission]);
         return redirect()->back();
+        }
     }
 
     public function destroy($id){

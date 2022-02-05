@@ -26,12 +26,6 @@ class HomeController extends Controller
      */
     public function index()
     {
-        //$Permission= Permission::create(['name'=> 'edit post']);
-        //Role::create(['name' => 'writter']);
-        //$role = Role::findById(1);
-        //$permission = Permission::findById(2);
-        //$role->givePermissionTo($permission );
-        //Auth::user()->assignRole('admin');
-        return redirect('/posts');
+        return redirect('/posts');         //redirecting to the posts route.
     }
 }

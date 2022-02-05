@@ -4,38 +4,52 @@ namespace App\Http\Controllers;
 
 use App\Models\Post;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class PostController extends Controller
 {
     public function __construct()
     {
         $this->middleware('permission:Show Post')->only('index');
-        $this->middleware('permission:Create Post')->only('create','store');
+        $this->middleware('permission:Create Post')->only('create', 'store');
         $this->middleware('permission:Edit Post')->only('edit', 'update');
         $this->middleware('permission:Delete Post')->only('destroy');
     }
-    public function index(){
+    public function index()
+    {
         $posts = Post::all();
-        return view('posts.index',['posts'=>$posts]);
+        return view('posts.index', ['posts' => $posts]);
     }
 
-    public function create(){
+    public function create()
+    {
         return view('posts.create');
     }
-    public function store(Request $request){
-        $posts = new Post;
-        $posts->title = $request->title;
-        $posts->description = $request->description;
-        $posts->save();
-        return redirect('/posts');
+    public function store(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'title' => ['required'],
+            'description' => ['required'],
+        ]);
+        if ($validator->fails()) {
+            return "validation Fails For Update";
+        } else {
+            $posts = new Post;
+            $posts->title = $request->title;
+            $posts->description = $request->description;
+            $posts->save();
+            return redirect('/posts');
+        }
     }
 
-    public function edit($id){
+    public function edit($id)
+    {
         $post = Post::find($id);
-        return view('posts.edit',['post'=>$post]);
+        return view('posts.edit', ['post' => $post]);
     }
 
-    public function update(Request $request,$id){
+    public function update(Request $request, $id)
+    {
         $post = Post::find($id);
         $post->title = $request->title;
         $post->description = $request->description;
@@ -43,13 +57,15 @@ class PostController extends Controller
         return redirect('/posts');
     }
 
-    public function destroy($id){
+    public function destroy($id)
+    {
         $post = Post::find($id);
         $post->delete();
         return redirect('/posts');
     }
 
-    public function show($id){
+    public function show($id)
+    {
         return 0;
     }
 }

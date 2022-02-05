@@ -26,14 +26,16 @@ Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::resource('posts', PostController::class);
-
-Route::resource('roles',RoleController::class);
-Route::get('/get-data/{id}', [RoleController::class, 'getData']);
-Route::post('/save-permission', [RoleController::class, 'SavePermission'])->name('savePermission');
-
-
 Route::resource('permissions',PermissionController::class);
 Route::resource('users',UsersController::class);
+Route::resource('roles',RoleController::class);
+
+
+Route::get('/get-data/{id}', [RoleController::class, 'getData']);  //I used this route for loading ajax data.
+Route::post('/save-permission', [RoleController::class, 'SavePermission'])->name('savePermission'); //used this custom route to save the permissions into role, but its not necessary.
+
+
+
 
 
 
